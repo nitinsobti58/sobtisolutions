@@ -99,3 +99,16 @@ export const featuredProperties = sortedProperties.filter((p) => p.featured);
 export function getProperty(slug: string): Property | undefined {
   return properties.find((p) => p.slug === slug);
 }
+
+/**
+ * The only way an address reaches the page. Returns undefined unless the entry has
+ * explicitly opted in with showAddress, which requires family sign-off.
+ */
+export function publicAddress(property: Property): string | undefined {
+  return property.showAddress === true ? property.address : undefined;
+}
+
+/** First photo, or undefined when the designed placeholder should render. */
+export function leadPhoto(property: Property): string | undefined {
+  return property.photos[0];
+}
