@@ -15,11 +15,11 @@ export function Header() {
       <div className="wrap flex h-16 items-center justify-between gap-4">
         <Link
           href="/"
-          className="font-heading text-base font-semibold tracking-[-0.01em] whitespace-nowrap text-foreground sm:text-xl"
+          className="font-heading text-base leading-tight font-semibold tracking-[-0.01em] text-foreground sm:text-xl sm:whitespace-nowrap"
         >
           {site.name}
         </Link>
-        <nav aria-label="Primary" className="flex items-center gap-4 sm:gap-8">
+        <nav aria-label="Primary" className="flex shrink-0 items-center gap-3 sm:gap-8">
           {nav.map((item) => (
             <NavLink
               key={item.href}

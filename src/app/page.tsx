@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Traverse } from "@/components/brand/traverse";
 import { CtaLink, textLinkClass } from "@/components/layout/cta-link";
+import { TitleBlock } from "@/components/layout/title-block";
 import { PropertyCard } from "@/components/properties/property-card";
 import { featuredProperties } from "@/data/properties";
 import { site } from "@/lib/site";
@@ -17,9 +18,25 @@ const trust = [
 const caps =
   "font-heading text-xs font-medium tracking-[0.06em] uppercase text-muted-foreground";
 
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.legalName,
+  alternateName: site.name,
+  url: site.url,
+  email: site.email,
+  logo: `${site.url}/icon.svg`,
+  areaServed: { "@type": "AdministrativeArea", name: site.areaServed },
+  address: { "@type": "PostalAddress", addressRegion: "NJ", addressCountry: "US" },
+};
+
 export default function HomePage() {
   return (
     <main className="flex flex-1 flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
+      />
       <section className="wrap grid gap-10 pt-16 pb-[72px] md:grid-cols-12 md:gap-6 md:pt-24 md:pb-28">
         <div className="reveal flex flex-col items-start gap-6 md:col-span-7">
           <p className={`${caps} leading-5`}>
@@ -51,16 +68,7 @@ export default function HomePage() {
         <h2 id="trust-heading" className="sr-only">
           At a glance
         </h2>
-        <dl className="grid grid-cols-2 gap-px border border-foreground bg-border md:grid-cols-4">
-          {trust.map((item) => (
-            <div key={item.label} className="bg-background px-5 py-5 md:px-6">
-              <dt className={caps}>{item.label}</dt>
-              <dd className="mt-1 font-heading text-lg leading-tight font-medium tabular-nums text-balance md:text-[22px]">
-                {item.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <TitleBlock items={trust} frame="ink" columns={4} />
       </section>
 
       <section className="mt-16 bg-muted py-16 md:mt-24 md:py-24" aria-labelledby="featured-heading">

@@ -26,8 +26,20 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description: site.description,
+  // "./" resolves against each route's own path, so every page gets a self-referencing
+  // canonical and og:url while inheriting type, locale, and siteName. Titles and
+  // descriptions flow into og:* and twitter:* from each page's own metadata.
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: site.name,
+    url: "./",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
   alternates: {
-    canonical: "/",
+    canonical: "./",
   },
 };
 

@@ -7,6 +7,8 @@ import {
 
 type Props = {
   property: Property;
+  /** h3 under a section heading (homepage strip); h2 directly under a page h1 (/properties). */
+  headingLevel?: "h2" | "h3";
 };
 
 /**
@@ -14,7 +16,7 @@ type Props = {
  * seeded parcel sketch; a photo later replaces only the inside of the same frame.
  * Renders name, area, type, status, and year only — never the address.
  */
-export function PropertyCard({ property }: Props) {
+export function PropertyCard({ property, headingLevel: Heading = "h3" }: Props) {
   const type = propertyTypeLabels[property.type];
   const status = propertyStatusLabels[property.status];
 
@@ -29,7 +31,7 @@ export function PropertyCard({ property }: Props) {
         </p>
       </div>
       <div className="flex flex-col gap-3 p-4">
-        <h3 className="font-heading text-lg font-medium">{property.name}</h3>
+        <Heading className="font-heading text-lg font-medium">{property.name}</Heading>
         <div className="flex flex-wrap gap-1.5">
           <Chip>{status}</Chip>
           {property.acquired ? <Chip>Acquired {property.acquired}</Chip> : null}
