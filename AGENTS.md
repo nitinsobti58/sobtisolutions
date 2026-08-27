@@ -20,7 +20,7 @@ Next.js (App Router) + TypeScript, Tailwind CSS v4, shadcn/ui (Base UI, `base-no
 
 - `src/app` — routes: `/`, `/properties`, `/about`, `/contact`. Plain TSX pages with per-route metadata.
 - `src/data/properties.ts` — the property inventory. Single source of truth: the grid, the homepage strip, and the empty state all derive from it. Adding a property is one entry plus photos, nothing else.
-- `src/components/layout` — header, footer. `src/components/properties` — grid and cards. `src/components/ui` — shadcn output (do not hand-edit).
+- `src/components/layout` — header, footer, nav link, CTA link. `src/components/properties` — grid and cards. `src/components/brand` — the Traverse (the plat-style signature drawing) with its pure math in `src/lib/survey.ts`. `src/components/ui` — shadcn output (do not hand-edit).
 - `src/lib/site.ts` — name, URL, contact email, legal line. The only place the domain is written.
 
 ## Hard rules

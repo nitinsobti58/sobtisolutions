@@ -7,6 +7,7 @@ export const site = {
     "Sobti Solutions LLC is a family-owned real estate holding company based in Ocean County, New Jersey.",
   email: "info@sobtisolutions.com",
   areaServed: "Ocean County, New Jersey",
+  locality: "Toms River, New Jersey",
   // TODO: confirm the exact registered LLC name and state of formation for the footer legal line.
   legalName: "Sobti Solutions LLC",
   stateOfFormation: "New Jersey",
