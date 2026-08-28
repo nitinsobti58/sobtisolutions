@@ -7,6 +7,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // "server-only" throws outside a React Server environment; tests import server modules directly.
+      "server-only": path.resolve(__dirname, "./src/test/server-only.ts"),
     },
   },
   test: {

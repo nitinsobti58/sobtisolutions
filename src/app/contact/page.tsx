@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 
-import { CtaLink, textLinkClass } from "@/components/layout/cta-link";
+import { ContactForm } from "@/components/contact/contact-form";
+import { textLinkClass } from "@/components/layout/cta-link";
 import { TitleBlock } from "@/components/layout/title-block";
 import { site } from "@/lib/site";
 
@@ -9,7 +11,13 @@ export const metadata: Metadata = {
   description: `Write to Sobti Solutions LLC at ${site.email} about a property, a lease, or a question.`,
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  // Rendered per request so the form's time trap counts from this visit, not from the build.
+  // A Server Component renders once per request after connection(), so reading the clock here is stable.
+  await connection();
+  // eslint-disable-next-line react-hooks/purity
+  const startedAt = Date.now();
+
   return (
     <main className="wrap flex flex-1 flex-col gap-12 py-16 md:gap-16 md:py-24">
       <section className="flex flex-col gap-6">
@@ -22,20 +30,18 @@ export default function ContactPage() {
         </p>
       </section>
 
-      {/* TODO (Phase 4): the message form lands here. The email line below stays visible in every state. */}
       <section className="flex flex-col gap-6" aria-labelledby="write-heading">
-        <h2 id="write-heading" className="sr-only">
-          Write to us
+        <h2 id="write-heading" className="font-heading text-2xl font-medium tracking-[-0.01em] md:text-[28px]">
+          Send a message
         </h2>
-        <div className="flex flex-wrap items-center gap-6">
-          <CtaLink href={`mailto:${site.email}`}>Email {site.email}</CtaLink>
-          <span className="text-[15px] text-muted-foreground">
-            or copy it:{" "}
-            <a href={`mailto:${site.email}`} className={`${textLinkClass} text-foreground`}>
-              {site.email}
-            </a>
-          </span>
-        </div>
+        <ContactForm startedAt={startedAt} />
+        {/* Outside the form on purpose: this line stays put while the form is pending, sent, or failed. */}
+        <p className="text-[15px] text-muted-foreground">
+          or email{" "}
+          <a href={`mailto:${site.email}`} className={`${textLinkClass} text-foreground`}>
+            {site.email}
+          </a>
+        </p>
       </section>
 
       <section className="flex flex-col gap-6" aria-labelledby="details-heading">

@@ -18,6 +18,10 @@ bun dev
 
 Open http://localhost:3000.
 
+## Environment
+
+The contact form sends mail through Zoho SMTP. Copy `.env.example` to `.env.local` and fill in the three variables it lists; the same three are set in Vercel. Without them the form shows its failure state and points visitors at the email address instead.
+
 ## Scripts
 
 ```bash
@@ -36,9 +40,10 @@ bun run test:watch  # vitest in watch mode
 src/
 ├── app/                 # routes (App Router)
 ├── components/
+│   ├── contact/         # contact form
 │   ├── layout/          # header, footer
 │   ├── properties/      # property grid and cards
 │   └── ui/              # shadcn/ui components
 ├── data/                # property inventory
-└── lib/                 # utilities and site config
+└── lib/                 # utilities, site config, contact schema, mail
 ```

@@ -7,6 +7,10 @@ import { cn } from "@/lib/utils";
 export const textLinkClass =
   "underline decoration-1 decoration-muted-foreground underline-offset-4 transition-colors hover:decoration-primary";
 
+/** The site's one button: 40px, Archivo 500 15px, Bay with a darker hover, and a full-strength focus ring. */
+export const ctaButtonClass =
+  "h-10 px-5 font-heading text-[15px] font-medium hover:bg-primary-hover focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
 type Props = {
   href: string;
   variant?: "default" | "outline";
@@ -21,8 +25,8 @@ export function CtaLink({ href, variant = "default", className, children }: Prop
       href={href}
       className={cn(
         buttonVariants({ variant, size: "lg" }),
-        "h-10 px-5 font-heading text-[15px] font-medium focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        variant === "default" && "hover:bg-primary-hover",
+        ctaButtonClass,
+        variant === "outline" && "hover:bg-muted",
         className,
       )}
     >
